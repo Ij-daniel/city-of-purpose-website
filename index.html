@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>City of Purpose Ministries Int’l</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  /* ===== GLOBAL ===== */
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Roboto',sans-serif;background:#0D1B2A;color:#0D1B2A;scroll-behavior:smooth;}
+a{text-decoration:none;transition:0.3s;}
+img{max-width:100%;border-radius:10px;}
+
+/* ===== SECTION ANIMATION SETUP ===== */
+section{
+  padding:6rem 2rem;
+  max-width:1200px;
+  margin:auto;
+  opacity:0;
+  transform:translateY(60px);
+  transition:all 1s ease;
+}
+
+section.show{
+  opacity:1;
+  transform:translateY(0);
+}
+
+section h2{
+  text-align:center;
+  margin-bottom:2rem;
+  font-family:'Poppins',sans-serif;
+  color:#FFD700;
+  position:relative;
+}
+
+section h2::after{
+  content:"";
+  width:60px;
+  height:3px;
+  background:#FFD700;
+  display:block;
+  margin:10px auto 0;
+  border-radius:2px;
+}
+
+/* ===== NAVBAR ===== */
+nav{
+  background:#0D1B2A;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:1rem 2rem;
+  position:sticky;
+  top:0;
+  z-index:1000;
+}
+nav .logo{
+  font-family:'Poppins',sans-serif;
+  font-weight:700;
+  font-size:1.6rem;
+  color:#FFD700;
+}
+nav ul{
+  display:flex;
+  list-style:none;
+}
+nav ul li{
+  margin-left:2rem;
+}
+nav ul li a{
+  color:#F5F5F5;
+  font-weight:500;
+}
+nav ul li a:hover{
+  color:#FFD700;
+}
+
+/* ===== HERO ===== */
+.hero{
+  height:90vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+
+  max-width:1200px;
+  margin:2rem auto;
+  padding:2rem;
+
+  background:url('https://picsum.photos/1500/700?random=1') center/cover no-repeat;
+  border-radius:15px;
+  position:relative;
+  overflow:hidden;
+}
+.hero::after{
+  content:"";
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(13,27,42,0.6);
+}
+.hero-content{
+  position:relative;
+  z-index:1;
+}
+.hero h1{
+  font-size:3rem;
+  margin-bottom:1rem;
+  font-family:'Poppins',sans-serif;
+  color:#FFD700;
+}
+.hero p{
+  font-size:1.5rem;
+  max-width:700px;
+  color:#F5F5F5;
+}
+
+/* ===== CARD CONTAINERS ===== */
+.card-container{
+  display:flex;
+  flex-wrap:wrap;
+  gap:2rem;
+  justify-content:center;
+}
+
+.card{
+  background:#F5F5F5;
+  color:#0D1B2A;
+  padding:2rem;
+  border-radius:15px;
+  text-align:center;
+  transition:0.4s;
+  flex:1 1 250px;
+
+  /* Fade animation for cards */
+  opacity:0;
+  transform:translateY(40px);
+}
+
+section.show .card{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* Stagger effect */
+section.show .card:nth-child(1){transition-delay:0.1s;}
+section.show .card:nth-child(2){transition-delay:0.2s;}
+section.show .card:nth-child(3){transition-delay:0.3s;}
+section.show .card:nth-child(4){transition-delay:0.4s;}
+
+.card:hover{
+  transform:translateY(-10px);
+  box-shadow:0 10px 20px rgba(0,0,0,0.3);
+}
+
+.card img{
+  margin-bottom:1rem;
+  max-height:180px;
+  object-fit:cover;
+}
+
+/* ===== EVENTS ===== */
+.event{
+  background:#FFD700;
+  color:#0D1B2A;
+  padding:1.5rem;
+  border-radius:12px;
+  margin-bottom:2rem;
+  transition:0.3s;
+}
+.event:hover{
+  transform:translateY(-5px);
+  box-shadow:0 8px 20px rgba(0,0,0,0.2);
+}
+
+/* ===== SERMONS ===== */
+.sermon iframe,
+.sermon audio{
+  width:100%;
+  border-radius:8px;
+  margin-bottom:1rem;
+}
+
+/* ===== CONTACT ===== */
+form input,
+form textarea{
+  width:100%;
+  padding:0.7rem;
+  margin-bottom:1rem;
+  border:none;
+  border-radius:5px;
+}
+form button{
+  background:#FFD700;
+  color:#0D1B2A;
+  border:none;
+  padding:0.7rem 1.5rem;
+  border-radius:5px;
+  font-weight:700;
+  cursor:pointer;
+  transition:0.3s;
+}
+form button:hover{
+  background:#F5F5F5;
+  color:#0D1B2A;
+}
+
+.map-container{
+  margin-top:2rem;
+  border-radius:10px;
+  overflow:hidden;
+}
+
+/* ===== FOOTER ===== */
+footer{
+  background:#08142A;
+  text-align:center;
+  padding:2rem;
+  color:#F5F5F5;
+}
+footer a{
+  color:#FFD700;
+  margin:0 0.5rem;
+}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:768px){
+  nav ul{flex-direction:column;gap:1rem;}
+  .hero h1{font-size:2.2rem;}
+  .hero p{font-size:1.2rem;}
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+/* Hide hamburger on desktop */
+.menu-toggle{
+  display:none;
+  font-size:2rem;
+  color:#FFD700;
+  cursor:pointer;
+}
+
+/* MOBILE */
+@media(max-width:768px){
+
+  .menu-toggle{
+    display:block;
+  }
+
+  nav{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.menu-toggle{
+  margin-left:auto;
+}
+
+/* SIDE MENU */
+#nav-links{
+  position:fixed;
+  top:0;
+  right:-250px; /* hidden */
+  width:250px;
+  height:100%;
+  background:#0D1B2A;
+  padding:2rem 1.5rem;
+  display:flex;
+  flex-direction:column;
+  gap:1.5rem;
+
+  transition:right 0.4s ease;
+  z-index:1000;
+}
+
+/* ACTIVE (OPEN) */
+#nav-links.active{
+  right:0;
+}
+
+/* CLOSE BUTTON */
+.close-btn{
+  font-size:2rem;
+  color:#FFD700;
+  cursor:pointer;
+  align-self:flex-end;
+}
+  nav ul li{
+    margin:1rem 0;
+  }
+}
+
+/* overlay */
+.overlay{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.5);
+  opacity:0;
+  pointer-events:none;
+  transition:0.3s ease;
+  z-index:999;
+}
+
+.overlay.active{
+  opacity:1;
+  pointer-events:auto;
+}
+
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="logo">City of Purpose Ministries Int’l</div>
+  <div class="menu-toggle" id="menu-toggle">
+  ☰
+</div>
+  <ul id="nav-links">
+    <div class="close-btn" id="close-btn">✖</div>
+    <li><a href="#hero">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#ministries">Ministries</a></li>
+    <li><a href="#events">Events</a></li>
+    <li><a href="#sermons">Sermons</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-content">
+    <h1>City of Purpose Ministries Int’l</h1>
+    <p>Welcome to our faith community. Explore our ministries, events, sermons, and join us in living with purpose.</p>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <h2>About Us</h2>
+  <div class="card-container">
+    <div class="card">
+      <img src="https://picsum.photos/300/200?random=2" alt="About Image">
+      <p>Founded in 2010, our church nurtures spiritual growth, community, and service to others. <a href="about.html">Read More →</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- MINISTRIES -->
+<section id="ministries">
+  <h2>Our Ministries</h2>
+  <div class="card-container">
+    <div class="card">
+      <img src="https://picsum.photos/300/200?random=3" alt="Youth Ministry">
+      <h4>Youth Ministry</h4>
+      <p>Engaging young believers in faith, fellowship, and community service. <a href="ministries.html">Read More →</a></p>
+    </div>
+    <div class="card">
+      <img src="https://picsum.photos/300/200?random=4" alt="Women Ministry">
+      <h4>Women’s Ministry</h4>
+      <p>Empowering women spiritually and socially. <a href="ministries.html">Read More →</a></p>
+    </div>
+    <div class="card">
+      <img src="https://picsum.photos/300/200?random=5" alt="Outreach Ministry">
+      <h4>Outreach Ministry</h4>
+      <p>Serving the community with charity and programs. <a href="ministries.html">Read More →</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- EVENTS -->
+<section id="events">
+  <h2>Upcoming Events</h2>
+  <div class="card-container">
+    <div class="event">
+      <h4>Sunday Service</h4>
+      <p>Date: March 10, 2026 | Time: 10:00 AM | Location: Main Hall</p>
+    </div>
+    <div class="event">
+      <h4>Community Outreach</h4>
+      <p>Date: March 20, 2026 | Time: 2:00 PM | Location: Community Center</p>
+    </div>
+  </div>
+  <p style="text-align:center;"><a href="events.html">View All Events →</a></p>
+</section>
+
+<!-- SERMONS -->
+<section id="sermons">
+  <h2>Latest Sermons</h2>
+  <div class="card-container">
+    <div class="sermon card">
+      <iframe width="100%" height="200" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
+      <p>Living with Purpose. <a href="sermons.html">Read More →</a></p>
+    </div>
+    <div class="sermon card">
+      <audio controls>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+      </audio>
+      <p>Faith and Community. <a href="sermons.html">Read More →</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <h2>Contact Us</h2>
+  <form>
+    <input type="text" placeholder="Your Name" required>
+    <input type="email" placeholder="Your Email" required>
+    <textarea rows="5" placeholder="Your Message" required></textarea>
+    <button type="submit">Send Message</button>
+  </form>
+  <div class="map-container">
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.019347116936!2d-122.4194152846811!3d37.77492977975944!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8085818aa5e745c1%3A0xabc1234567890!2sChurch!5e0!3m2!1sen!2sus!4v1618888888888!5m2!1sen!2sus" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+  </div>
+  <p style="text-align:center;margin-top:1rem;">
+    <strong>Address:</strong> 123 Purpose Drive, City, Country | <strong>Phone:</strong> +123 456 7890 | <strong>Email:</strong> info@copmi.org
+  </p>
+</section>
+
+<footer>
+  <p>&copy; 2026 City of Purpose Ministries Int’l | <a href="#">Facebook</a> <a href="#">Instagram</a> <a href="#">Twitter</a></p>
+</footer>
+
+<script>
+/* ===== SCROLL ANIMATION ===== */
+const sections = document.querySelectorAll("section");
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      entry.target.classList.add("show");
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.2 });
+
+sections.forEach(section => {
+  observer.observe(section);
+});
+
+
+/* ===== HAMBURGER MENU ===== */
+const toggle = document.getElementById("menu-toggle");
+const navLinks = document.getElementById("nav-links");
+const closeBtn = document.getElementById("close-btn");
+const overlay = document.getElementById("overlay");
+
+// open
+toggle.addEventListener("click", () => {
+  navLinks.classList.add("active");
+  overlay.classList.add("active");
+});
+
+// close with X
+closeBtn.addEventListener("click", () => {
+  navLinks.classList.remove("active");
+  overlay.classList.remove("active");
+});
+
+// close when clicking overlay
+overlay.addEventListener("click", () => {
+  navLinks.classList.remove("active");
+  overlay.classList.remove("active");
+});
+</script>
+
+
+<div class="overlay" id="overlay"></div>
+</body>
+</html>

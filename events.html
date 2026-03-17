@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Events - City of Purpose Ministries Int’l</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Roboto',sans-serif;background:#0D1B2A;color:#0D1B2A;}
+a{text-decoration:none;transition:0.3s;}
+nav{background:#0D1B2A;display:flex;justify-content:space-between;align-items:center;padding:1rem 2rem;position:sticky;top:0;z-index:1000;}
+nav .logo{font-family:'Poppins',sans-serif;font-weight:700;font-size:1.6rem;color:#FFD700;}
+nav ul{display:flex;list-style:none;}
+nav ul li{margin-left:2rem;}
+nav ul li a{color:#F5F5F5;font-weight:500;}
+nav ul li a:hover{color:#FFD700;}
+section{padding:6rem 2rem;max-width:1000px;margin:auto;opacity:0;transform:translateY(50px);animation:fadeInUp 1s forwards;}
+section h2{text-align:center;margin-bottom:2rem;font-family:'Poppins',sans-serif;color:#FFD700;position:relative;}
+section h2::after{content:"";width:60px;height:3px;background:#FFD700;display:block;margin:10px auto 0;border-radius:2px;}
+@keyframes fadeInUp{0%{opacity:0;transform:translateY(50px);}100%{opacity:1;transform:translateY(0);}}
+.event{background:#F5F5F5;color:#0D1B2A;padding:1.5rem;border-radius:12px;margin-bottom:2rem;transition:0.3s;}
+.event:hover{transform:translateY(-5px);box-shadow:0 8px 20px rgba(0,0,0,0.2);}
+footer{background:#08142A;text-align:center;padding:2rem;color:#F5F5F5;}
+footer a{color:#FFD700;margin:0 0.5rem;}
+@media(max-width:768px){nav ul{flex-direction:column;gap:1rem;}}
+</style>
+</head>
+<body>
+<nav>
+  <div class="logo">City of Purpose Ministries Int’l</div>
+  <ul>
+    <li><a href="index.html#hero">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="ministries.html">Ministries</a></li>
+    <li><a href="events.html">Events</a></li>
+    <li><a href="sermons.html">Sermons</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+</nav>
+
+<section>
+<h2>Upcoming Events</h2>
+<div class="event">
+<h3>Sunday Service</h3>
+<p>Date: March 10, 2026 | Time: 10:00 AM | Location: Main Hall</p>
+</div>
+<div class="event">
+<h3>Community Outreach</h3>
+<p>Date: March 20, 2026 | Time: 2:00 PM | Location: Community Center</p>
+</div>
+<div class="event">
+<h3>Bible Study Night</h3>
+<p>Date: March 25, 2026 | Time: 6:00 PM | Location: Fellowship Hall</p>
+</div>
+<div class="event">
+<h3>Charity Fundraiser</h3>
+<p>Date: April 5, 2026 | Time: 3:00 PM | Location: Church Grounds</p>
+</div>
+</section>
+
+<footer>
+<p>&copy; 2026 City of Purpose Ministries Int’l | <a href="#">Facebook</a> <a href="#">Instagram</a> <a href="#">Twitter</a></p>
+</footer>
+
+<script>
+const sections=document.querySelectorAll('section');
+const observer=new IntersectionObserver((entries)=>{
+entries.forEach(entry=>{
+if(entry.isIntersecting){
+entry.target.style.opacity='1';
+entry.target.style.transform='translateY(0)';
+observer.unobserve(entry.target);
+}
+});
+},{threshold:0.2});
+sections.forEach(sec=>observer.observe(sec));
+</script>
+</body>
+</html>
