@@ -276,26 +276,27 @@ html{
   }
 }
 
-/* SIDE MENU */
-#nav-links{
-  position:fixed;
-  top:0;
-  right:-250px; /* hidden */
-  width:250px;
-  height:100%;
-  background:#0D1B2A;
-  padding:2rem 1.5rem;
-  display:flex;
-  flex-direction:column;
-  gap:1.5rem;
+/* ===== MOBILE ONLY ===== */
+@media(max-width:768px){
 
-  transition:right 0.4s ease;
-  z-index:1000;
-}
+  #nav-links{
+    position:fixed;
+    top:0;
+    right:-250px;
+    width:250px;
+    height:100%;
+    background:#0D1B2A;
+    padding:2rem 1.5rem;
+    display:flex;
+    flex-direction:column;
+    gap:1.5rem;
+    transition:right 0.4s ease;
+    z-index:1000;
+  }
 
-/* ACTIVE (OPEN) */
-#nav-links.active{
-  right:0;
+  #nav-links.active{
+    right:0;
+  }
 }
 .overlay{
   position:fixed;
