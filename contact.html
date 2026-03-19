@@ -31,14 +31,101 @@ section {
   transform: translateY(50px);
   transition: all 1s ease-out;
 }
+/* CARD STYLE */
+.card-container{
+  display:flex;
+  flex-wrap:wrap;
+  gap:2rem;
+  justify-content:center;
+}
+
+.card{
+  background:#F5F5F5;
+  color:#0D1B2A;
+  padding:2rem;
+  border-radius:15px;
+  text-align:center;
+  flex:1 1 250px;
+}
+
+/* HAMBURGER */
+.menu-toggle{
+  display:none;
+  font-size:2rem;
+  color:#FFD700;
+  cursor:pointer;
+}
+
+/* MOBILE MENU */
+@media(max-width:768px){
+  .menu-toggle{display:block;}
+
+  #nav-links{
+    position:fixed;
+    top:0;
+    right:-250px;
+    width:250px;
+    height:100%;
+    background:#0D1B2A;
+    padding:2rem;
+    display:flex;
+    flex-direction:column;
+    gap:1.5rem;
+    transition:0.4s;
+    z-index:1000;
+  }
+
+  #nav-links.active{right:0;}
+}
+
+/* CLOSE BUTTON */
+.close-btn{
+  font-size:2rem;
+  color:#FFD700;
+  cursor:pointer;
+  align-self:flex-end;
+}
+
+/* OVERLAY */
+.overlay{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.5);
+  opacity:0;
+  pointer-events:none;
+  transition:0.3s;
+}
+
+.overlay.active{
+  opacity:1;
+  pointer-events:auto;
+}
+/* hide close button on desktop */
+.close-btn{
+  display:none;
+}
+
+@media(max-width:768px){
+  .close-btn{
+    display:block;
+  }
+}
 </style>
 </head>
 <body>
 
 <nav>
   <div class="logo">City of Purpose Ministries Int’l</div>
-  <ul>
-    <li><a href="index.html#hero">Home</a></li>
+
+  <div class="menu-toggle" id="menu-toggle">☰</div>
+
+  <ul id="nav-links">
+    <div class="close-btn" id="close-btn">✖</div>
+
+    <li><a href="index.html">Home</a></li>
     <li><a href="about.html">About</a></li>
     <li><a href="ministries.html">Ministries</a></li>
     <li><a href="events.html">Events</a></li>
@@ -48,19 +135,31 @@ section {
 </nav>
 
 <section>
-<h2>Contact Us</h2>
-<form>
-<input type="text" placeholder="Your Name" required>
-<input type="email" placeholder="Your Email" required>
-<textarea rows="5" placeholder="Your Message" required></textarea>
-<button type="submit">Send Message</button>
-</form>
-<div class="map-container">
-<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.019347116936!2d-122.4194152846811!3d37.77492977975944!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8085818aa5e745c1%3A0xabc1234567890!2sChurch!5e0!3m2!1sen!2sus!4v1618888888888!5m2!1sen!2sus" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+<h2>Contact & Location</h2>
+
+<div class="card-container">
+
+  <div class="card">
+    <h3>Church Address</h3>
+    <p>123 Purpose Drive,<br>Lagos, Nigeria</p>
+  </div>
+
+  <div class="card">
+    <h3>Phone</h3>
+    <p>+234 800 123 4567</p>
+  </div>
+
+  <div class="card">
+    <h3>Email</h3>
+    <p>info@copmi.org</p>
+  </div>
+
+  <div class="card">
+    <h3>Service Times</h3>
+    <p>Sunday: 8:00 AM & 10:30 AM<br>Wednesday: 6:00 PM</p>
+  </div>
+
 </div>
-<p style="text-align:center;margin-top:1rem;">
-<strong>Address:</strong> 123 Purpose Drive, City, Country | <strong>Phone:</strong> +123 456 7890 | <strong>Email:</strong> info@copmi.org
-</p>
 </section>
 
 <footer>
@@ -79,7 +178,35 @@ observer.unobserve(entry.target);
 });
 },{threshold:0.2});
 sections.forEach(sec=>observer.observe(sec));
+
+const toggle = document.getElementById("menu-toggle");
+const navLinks = document.getElementById("nav-links");
+const closeBtn = document.getElementById("close-btn");
+const overlay = document.getElementById("overlay");
+
+toggle.addEventListener("click", () => {
+  navLinks.classList.add("active");
+  overlay.classList.add("active");
+});
+
+closeBtn.addEventListener("click", () => {
+  navLinks.classList.remove("active");
+  overlay.classList.remove("active");
+});
+
+overlay.addEventListener("click", () => {
+  navLinks.classList.remove("active");
+  overlay.classList.remove("active");
+});
+// close menu when clicking any link
+document.querySelectorAll("#nav-links a").forEach(link => {
+  link.addEventListener("click", () => {
+    navLinks.classList.remove("active");
+    overlay.classList.remove("active");
+  });
+});
 </script>
 
+<div class="overlay" id="overlay"></div>
 </body>
 </html>
